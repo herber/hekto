@@ -28,6 +28,9 @@ hekto serve <path>
 ## 404 handling
 Add a `404.html` file in the top directory.
 
+## Single page applications
+Hekto supports single page applications like(react, vue, angular). Simply add a `200.html` file in your projects directory. Hekto serve your 200.html for all requests. You can still access all the other files with their urls.
+
 ## Contribute
 Create a pull request / issue to tell us about your awesome ideas, you want us to add or fork the repo and send us a link to your version.
 
