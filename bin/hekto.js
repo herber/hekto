@@ -144,14 +144,16 @@ if (args.serve) {
         }
       }
     } else {
-      // requested file / directory does not exists
-      this.status = 404;
+      if (!this.body) {
+        // requested file / directory does not exists
+        this.status = 404;
 
-      if (fs.existsSync(_404) && fs.lstatSync(_404).isFile() && _404 !== false) {
-        this.type = 'html';
-        this.body = fs.createReadStream(_404);
-      } else {
-        this.body = '404 - Not found';
+        if (fs.existsSync(_404) && fs.lstatSync(_404).isFile() && _404 !== false) {
+          this.type = 'html';
+          this.body = fs.createReadStream(_404);
+        } else {
+          this.body = '404 - Not found';
+        }
       }
     }
   });
