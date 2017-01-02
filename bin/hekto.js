@@ -144,6 +144,7 @@ if (args.serve) {
         }
       }
     } else {
+      // 200.html for single page applications
       if (fs.existsSync(_200) && fs.lstatSync(_200).isFile() && _200 !== false) {
         if (this.request.url.slice(-1) !== '/') {
           this.status = 307;
@@ -153,7 +154,7 @@ if (args.serve) {
           this.type = 'html';
           this.body = fs.createReadStream(_200);
         }
-      
+
         return ;
       }
 
