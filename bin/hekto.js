@@ -6,6 +6,7 @@ const app = koa();
 const path = require('path');
 const fs = require('fs');
 const argument = require('argument.js');
+const join = require('array-path-join');
 
 /*
   set argument options
@@ -32,6 +33,8 @@ if (args.v || args.version) {
   console.log(require('../package.json').version);
   process.exit();
 }
+
+args._.splice(0, 1);
 
 /*
   if `serve` command is passed in
@@ -68,7 +71,7 @@ if (args.serve) {
   // Add main webserver
   app.use(function *() {
     // Set path to requested file
-    let file = path.join(__dirname, this.request.url);
+    let file = path.join(process.cwd(), join(args._), this.request.url);
     // set 404 file
     const _404 = path.join(__dirname, '404.html');
     // set query eg. my-site.com/test?user=me
@@ -153,4 +156,6 @@ if (args.serve) {
 
   // serve on `port`
   app.listen(port);
+
+  console.log('\nserving ' + path.join(process.cwd(), join(args._)) + ' on port ' + port);
 }
