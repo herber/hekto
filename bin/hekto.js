@@ -74,6 +74,8 @@ if (args.serve) {
     let file = path.join(process.cwd(), join(args._), this.request.url);
     // set 404 file
     const _404 = path.join(__dirname, '404.html');
+    // set 200 file
+    const _200 = path.join(__dirname, '200.html');
     // set query eg. my-site.com/test?user=me
     const query = this.querystring.length ? '?' + this.querystring : '';
 
