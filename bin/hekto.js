@@ -144,6 +144,19 @@ if (args.serve) {
         }
       }
     } else {
+      if (fs.existsSync(_200) && fs.lstatSync(_200).isFile() && _200 !== false) {
+        if (this.request.url.slice(-1) !== '/') {
+          this.status = 307;
+          this.redirect(this.request.url + '/' + query);
+        } else {
+          this.status = 200;
+          this.type = 'html';
+          this.body = fs.createReadStream(_200);
+        }
+      
+        return ;
+      }
+
       if (!this.body) {
         // requested file / directory does not exists
         this.status = 404;
