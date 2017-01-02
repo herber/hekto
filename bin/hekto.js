@@ -26,17 +26,21 @@ argument.command('serve', 'Serve the current directory.');
 const args = argument.parse(process.argv.slice(2));
 
 /*
-  if -v  of  --version option is passed in log the installed version of hekto
+  if -v  or --version option is passed in log the installed version of hekto to the console
 */
 if (args.v || args.version) {
   console.log(require('../package.json').version);
   process.exit();
 }
 
+/*
+  if `serve` command is passed in
+*/
 if (args.serve) {
   const port = args.port || 3000;
   const cache = args.maxage || 3600;
 
+  // Add caching
   app.use(require('koa-cash')({
     maxAge: cache,
     get (key, maxAge) {
@@ -47,8 +51,10 @@ if (args.serve) {
     }
   }))
 
+  // Add compression
   app.use(require('koa-compress')());
 
+  // Add 500 error handling
   app.use(function *(next) {
     try {
       yield next;
@@ -59,18 +65,27 @@ if (args.serve) {
     }
   });
 
+  // Add main webserver
   app.use(function *() {
+    // Set path to requested file
     let file = path.join(__dirname, this.request.url);
+    // set 404 file
     const _404 = path.join(__dirname, '404.html');
+    // set query eg. my-site.com/test?user=me
     const query = this.querystring.length ? '?' + this.querystring : '';
 
     this.response.set('X-Powered-By', 'Hekto');
 
+    // if requested file / directory exists
     if (fs.existsSync(file)) {
+      // if `file` is a directory
       if (fs.lstatSync(file).isDirectory()) {
+        // add `/index.html` to file
         file = path.join(file, 'index.html');
 
+        // if file + `index.html` exists
         if (fs.existsSync(file)) {
+          // add trailing slash
           if (this.request.url.slice(-1) !== '/') {
             this.status = 307;
 
@@ -95,10 +110,13 @@ if (args.serve) {
         return ;
       }
 
+      // if `file` is a file
       if (fs.lstatSync(file).isFile()) {
         this.status = 200;
 
+        // if file extension is `.html`
         if (path.extname(file) == '.html') {
+          // set content type to html
           this.type = 'html';
         } else {
           this.type = 'text/plain; charset=utf-8';
@@ -109,6 +127,7 @@ if (args.serve) {
         return ;
       }
 
+      // if  nothing is served yet
       if (!this.body) {
         this.status = 404;
 
@@ -120,6 +139,7 @@ if (args.serve) {
         }
       }
     } else {
+      // requested file / directory does not exists
       this.status = 404;
 
       if (fs.existsSync(_404) && fs.lstatSync(_404).isFile() && _404 !== false) {
@@ -131,5 +151,6 @@ if (args.serve) {
     }
   });
 
+  // serve on `port`
   app.listen(port);
 }
