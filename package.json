@@ -13,6 +13,9 @@
     "http",
     "server"
   ],
+  "bin": {
+    "hekto": "./bin/hekto.js"
+  },
   "license": "MIT",
   "author": "tobihrbr",
   "dependencies": {
