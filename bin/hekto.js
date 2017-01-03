@@ -158,6 +158,14 @@ if (args.serve) {
         return ;
       }
 
+      // Add trailing slash for extensionless html
+      if (fs.existsSync(file + '.html') && fs.lstatSync(file + '.html').isFile()) {
+        this.status = 307;
+        this.redirect(this.request.url + '/' + query);
+
+        return ;
+      }
+
       // Serve extensionless html
       if (fs.existsSync(file.slice(0, -1) + '.html') && fs.lstatSync(file.slice(0, -1) + '.html') && this.request.url.slice(-1) === '/' ) {
         this.status = 200;
