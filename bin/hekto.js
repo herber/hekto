@@ -158,6 +158,15 @@ if (args.serve) {
         return ;
       }
 
+      // Serve extensionless html
+      if (fs.existsSync(file.slice(0, -1) + '.html') && fs.lstatSync(file.slice(0, -1) + '.html') && this.request.url.slice(-1) === '/' ) {
+        this.status = 200;
+        this.type = 'html';
+        this.body = fs.createReadStream(file.slice(0, -1) + '.html');
+
+        return ;
+      }
+
       if (!this.body) {
         // requested file / directory does not exists
         this.status = 404;
