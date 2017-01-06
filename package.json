@@ -4,7 +4,7 @@
     "url": "https://github.com/tobihrbr/hekto.git",
     "type": "git"
   },
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Serve static files",
   "keywords": [
     "serve",
@@ -20,6 +20,7 @@
   "author": "tobihrbr",
   "dependencies": {
     "argument.js": "0.0.1",
+    "array-path-join": "0.0.1",
     "koa": "^1.2.4",
     "koa-cash": "^2.1.0",
     "koa-compress": "^1.0.9"
