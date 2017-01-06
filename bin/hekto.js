@@ -192,5 +192,5 @@ if (args.serve) {
   // serve on `port`
   app.listen(port);
 
-  console.log('\nserving ' + path.join(process.cwd(), join(args._)) + ' on port ' + port);
+  console.log('\nServing on port ' + port);
 }
