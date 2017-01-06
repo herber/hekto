@@ -18,7 +18,7 @@ hekto serve <path>
 | -----------------| ------------------------------------------------ |
 | --version [-v]   | Show the installed version.                      |
 | --port \<port>   | The port your static content should be served on |
-| --maxage \<maxag>| The maxage for http caching.                     |
+| --maxage \<maxage>| The maxage for http caching.                     |
 
 ### Command
 | command| description                |
