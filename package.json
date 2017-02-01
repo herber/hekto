@@ -21,8 +21,10 @@
   "dependencies": {
     "argument.js": "0.0.1",
     "array-path-join": "0.0.1",
+    "file-type": "^4.1.0",
     "koa": "^1.2.4",
     "koa-cash": "^2.1.0",
-    "koa-compress": "^1.0.9"
+    "koa-compress": "^1.0.9",
+    "read-chunk": "^2.0.0"
   }
 }
