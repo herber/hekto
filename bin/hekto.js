@@ -7,6 +7,8 @@ const path = require('path');
 const fs = require('fs');
 const argument = require('argument.js');
 const join = require('array-path-join');
+const readChunk = require('read-chunk');
+const fileType = require('file-type');
 
 /*
   set argument options
@@ -125,17 +127,22 @@ if (args.serve) {
       if (fs.lstatSync(file).isFile()) {
         this.status = 200;
 
-        // if file extension is `.html`
         if (path.extname(file) == '.html') {
-          // set content type to html
           this.type = 'html';
+          this.body = fs.createReadStream(file);
         } else {
-          this.type = 'text/plain; charset=utf-8';
+          const fileBuffer = readChunk.sync(file, 0, 4100);
+          const mime = fileType(fileBuffer);
+
+          if (mime) {
+            this.type = mime.mime + '; charset=utf-8';
+          } else {
+            this.type = 'text/plain; charset=utf-8';
+          }
+
+
+          this.body = fs.createReadStream(file);
         }
-
-        this.body = fs.createReadStream(file);
-
-        return ;
       }
 
       // if  nothing is served yet
