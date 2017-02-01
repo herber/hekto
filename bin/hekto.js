@@ -71,11 +71,17 @@ if (args.serve) {
   // Add main webserver
   app.use(function *() {
     // Set path to requested file
-    let file = path.join(process.cwd(), join(args._), this.request.url);
+    let argDir = '';
+
+    if (join(args._)) argDir = join(args._);
+
+    let file = path.join(process.cwd(), argDir, this.request.url);
+
+    let dir = path.join(process.cwd(), argDir);
     // set 404 file
-    const _404 = path.join(__dirname, '404.html');
+    const _404 = path.join(dir, '404.html');
     // set 200 file
-    const _200 = path.join(__dirname, '200.html');
+    const _200 = path.join(dir, '200.html');
     // set query eg. my-site.com/test?user=me
     const query = this.querystring.length ? '?' + this.querystring : '';
 
