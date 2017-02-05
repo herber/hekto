@@ -128,7 +128,10 @@ if (args.serve) {
         this.status = 200;
 
         if (path.extname(file) == '.html') {
-          this.type = 'html';
+          this.type = 'text/html';
+          this.body = fs.createReadStream(file);
+        } else if (path.extname(file) == '.css') {
+          this.type = 'text/css';
           this.body = fs.createReadStream(file);
         } else {
           const fileBuffer = readChunk.sync(file, 0, 4100);
@@ -139,7 +142,6 @@ if (args.serve) {
           } else {
             this.type = 'text/plain; charset=utf-8';
           }
-
 
           this.body = fs.createReadStream(file);
         }
