@@ -207,5 +207,5 @@ if (args.serve) {
   // serve on `port`
   app.listen(port);
 
-  console.log('\nServing on port ' + port);
+  console.log('Serving on port ' + port);
 }
