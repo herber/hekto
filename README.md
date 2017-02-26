@@ -30,7 +30,7 @@ hekto serve <path>
 Add a `404.html` file in the top directory.
 
 ## Single page applications
-Hekto supports single page applications like(react, vue and angular). Simply add a `200.html` file in your projects directory. Hekto will serve your 200.html for all requests. You can still access all the other files.
+Hekto supports single page applications like(react, vue and angular). Simply add a `200.html` file in your projects directory. Hekto will serve your 200.html on every requests. You can still access all the other files.
 
 ## Extension less html
 Extension less html makes it possible for you to strip `.html` for html files in urls. Eg. `help.html` is served at `/help.html` and at `/help`.
