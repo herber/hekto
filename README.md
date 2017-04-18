@@ -1,7 +1,7 @@
 ![HEKTO](https://cldup.com/RIKwNeeZw4.png)
 
 ## Installation
-> Hekto is written in node.js and must be installed via npm so you must have [Node.js](http://nodejs.org) installed
+> Hekto is written in node.js and must be installed via npm so you must have [Node.js](http://nodejs.org) installed.
 
 ```bash
 npm install -g hekto
