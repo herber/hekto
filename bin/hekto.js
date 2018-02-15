@@ -90,7 +90,7 @@ if (args.serve) {
 
     this.response.set('X-Powered-By', 'Hekto');
 
-    if (!isPathInside(file, process.cwd())) {
+    if (!isPathInside(file, path.join(process.cwd(), argDir))) {
       this.body = 'Bad Request';
       this.status = 400;
     }

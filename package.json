@@ -4,7 +4,7 @@
     "url": "https://github.com/tobihrbr/hekto.git",
     "type": "git"
   },
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Serve static files",
   "keywords": [
     "serve",
