@@ -9,6 +9,7 @@ const argument = require('argument.js');
 const join = require('array-path-join');
 const readChunk = require('read-chunk');
 const fileType = require('file-type');
+const isPathInside = require('path-is-inside');
 
 /*
   set argument options
@@ -88,6 +89,11 @@ if (args.serve) {
     const query = this.querystring.length ? '?' + this.querystring : '';
 
     this.response.set('X-Powered-By', 'Hekto');
+
+    if (!isPathInside(file, process.cwd())) {
+      this.body = 'Bad Request';
+      this.status = 400;
+    }
 
     // if requested file / directory exists
     if (fs.existsSync(file)) {
