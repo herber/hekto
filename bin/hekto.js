@@ -93,6 +93,8 @@ if (args.serve) {
     if (!isPathInside(file, path.join(process.cwd(), argDir))) {
       this.body = 'Bad Request';
       this.status = 400;
+
+      return;
     }
 
     // if requested file / directory exists
