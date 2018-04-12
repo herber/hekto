@@ -39,6 +39,13 @@ if (args.v || args.version) {
 
 args._.splice(0, 1);
 
+const stripTrailingSlash = (str) => {
+    if(str.substr(-1) === '/') {
+        return str.substr(0, str.length - 1);
+    }
+    return str;
+}
+
 /*
   if `serve` command is passed in
 */
@@ -184,7 +191,7 @@ if (args.serve) {
       // Add trailing slash for extensionless html
       if (fs.existsSync(file + '.html') && fs.lstatSync(file + '.html').isFile()) {
         this.status = 307;
-        this.redirect(this.request.url + '/' + query);
+        this.redirect(this.request.origin + stripTrailingSlash(this.request.url) + '/' + query);
 
         return ;
       }
